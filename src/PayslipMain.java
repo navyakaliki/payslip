@@ -4,23 +4,18 @@ public class PayslipMain {
     public static void main(String[] args) {
         Scanner scanner= new Scanner(System.in);
 
-        System.out.println("Enter Your First Name :");
-        String fName=scanner.nextLine();
-        System.out.println("Enter your last Name:");
-        String lName=scanner.nextLine();
-        System.out.println("Enter your annual Salary:");
-        int annualSalary= Integer.parseInt(scanner.nextLine());
-        System.out.println("Enter Super rate:");
-        int superRate= Integer.parseInt(scanner.nextLine());
-        System.out.println("Enter Pay period Start Date:(dd/mm/yyyy");
-        String startDate=scanner.nextLine();
-        System.out.println("Enter Pay period End date :9dd/mm/yyyy");
-        String endDate=scanner.nextLine();
-        System.out.println("Name:"+fName+lName+
-                "\n Pay-period Start"+startDate+
-                "\n Pay-period End" +endDate);
+        String fName = getDetails(scanner,"FIRST NAME");
+        String lName=getDetails(scanner,"LAST NAME");
+        int annualSalary = getNumericDetails(scanner,"Annual Salary");
+        int superRate = getNumericDetails(scanner, "Super Rate:");
+        String startDate=getDetails(scanner,"Pay-Period START -DATE:");
+        String endDate=getDetails(scanner,"Pay Period END-DATE");
+
+        System.out.println("Name:"+fName+ " " + lName+
+                "\nPay-period Start"+" " +startDate+
+                "\nPay-period End"+" "+ endDate);
         int grossSalary = getGrossSalary(annualSalary);
-        System.out.println("Gross income is "+ grossSalary);
+        System.out.println("Gross Income: "+ grossSalary);
         int incomeTax=0;
         incomeTax = getIncomeTax(annualSalary, incomeTax);
         System.out.println("Income Tax:"+ incomeTax);
@@ -30,18 +25,28 @@ public class PayslipMain {
         System.out.println("Super:"+superAmount);
     }
 
+    private static int getNumericDetails(Scanner scanner,String msg) {
+        System.out.println("Enter"+ msg);
+        return Integer.parseInt(scanner.nextLine());
+    }
+
+    private static String getDetails(Scanner scanner, String msg) {
+        System.out.println("Enter :" + msg);
+        return scanner.nextLine();
+    }
+
 
     private static int getGrossSalary(int annualSalary) {
         return annualSalary/12;
     }
 
     private static int getSuperAmount(int superRate, int grossSalary) {
-        return grossSalary*(superRate/100);
+        return (grossSalary*superRate)/100;
     }
 
     private static int getIncomeTax(int annualSalary, int incomeTax) {
         if (annualSalary>0 && annualSalary<=18200){
-        incomeTax=0;}
+            incomeTax=0;}
         else if (annualSalary>=18201 && annualSalary<37000) {
             incomeTax =(19 * annualSalary)/12;
         }
