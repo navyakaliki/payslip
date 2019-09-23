@@ -1,7 +1,6 @@
 public class SuperCalc {
     int superRate;
     int superAmount;
-    int grossSalary;
 
 
     public SuperCalc(int superRate, int grossSalary) {
