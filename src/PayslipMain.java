@@ -21,8 +21,8 @@ public class PayslipMain {
         System.out.println("Income Tax:"+ incomeTax);
         int netIncome = getNetIncome(grossSalary, incomeTax);
         System.out.println("Net Income is: "+ netIncome);
-        int superAmount = getSuperAmount(superRate, grossSalary);
-        System.out.println("Super:"+superAmount);
+        SuperCalc superAmt=new SuperCalc(superRate,grossSalary);
+        System.out.println(superAmt.getSuperAmount());
     }
 
     private static int getNumericDetails(Scanner scanner,String msg) {
@@ -40,9 +40,6 @@ public class PayslipMain {
         return annualSalary/12;
     }
 
-    private static int getSuperAmount(int superRate, int grossSalary) {
-        return (grossSalary*superRate)/100;
-    }
 
     private static int getIncomeTax(int annualSalary, int incomeTax) {
         if (annualSalary>0 && annualSalary<=18200){
