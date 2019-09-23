@@ -19,9 +19,27 @@ public class PayslipMain {
         System.out.println("Name:"+fName+lName+
                 "\n Pay-period Start"+startDate+
                 "\n Pay-period End" +endDate);
-        int grossSalary= annualSalary/12;
+        int grossSalary = getGrossSalary(annualSalary);
         System.out.println("Gross income is "+ grossSalary);
         int incomeTax=0;
+        incomeTax = getIncomeTax(annualSalary, incomeTax);
+        System.out.println("Income Tax:"+ incomeTax);
+        int netIncome = getNetIncome(grossSalary, incomeTax);
+        System.out.println("Net Income is: "+ netIncome);
+        int superAmount = getSuperAmount(superRate, grossSalary);
+        System.out.println("Super:"+superAmount);
+    }
+
+
+    private static int getGrossSalary(int annualSalary) {
+        return annualSalary/12;
+    }
+
+    private static int getSuperAmount(int superRate, int grossSalary) {
+        return grossSalary*(superRate/100);
+    }
+
+    private static int getIncomeTax(int annualSalary, int incomeTax) {
         if (annualSalary>0 && annualSalary<=18200){
         incomeTax=0;}
         else if (annualSalary>=18201 && annualSalary<37000) {
@@ -34,9 +52,10 @@ public class PayslipMain {
             incomeTax= (int) ((19822+(annualSalary-87000)*0.37)/12);}
         else if(annualSalary>=180001){
             incomeTax=(54232+(annualSalary-180000))/12;}
-        System.out.println("Income Tax:"+ incomeTax);
-        System.out.println("Net Income is: "+ (grossSalary-incomeTax));
-        int superAmount= (grossSalary*(superRate/100));
-        System.out.println("Super:"+superAmount);
+        return incomeTax;
+    }
+
+    private static int getNetIncome(int grossSalary, int incomeTax) {
+        return grossSalary-incomeTax;
     }
 }
