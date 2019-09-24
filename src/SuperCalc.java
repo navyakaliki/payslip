@@ -3,9 +3,10 @@ public class SuperCalc {
     int superAmount;
 
 
-    public SuperCalc(int superRate, int grossSalary) {
-        this.superRate = superRate;
-        this.superAmount = (grossSalary*superRate)/100;
+
+    public SuperCalc(float superRate, int grossSalary) {
+        this.superRate = (int) superRate;
+        this.superAmount = (int) ((grossSalary*superRate)/100);
 
     }
 
